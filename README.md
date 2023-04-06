@@ -1,2 +1,2 @@
 # Flask_training
-LEarning how to use Flask
+Learning how to use Flask
