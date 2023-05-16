@@ -1,0 +1,39 @@
+import json
+
+#data = {
+    #"id": id
+    #"posted_data": txt
+#}
+
+class DataHelper:
+    def __init__(self, smth):
+        self.smth = smth
+    
+    def id_generator():
+        i = 0
+        while i <= 100:
+            return(i+1)
+
+    def content_updater(n, what):
+        updated_content={}
+        updated_content.update({'id': n})
+        updated_content.update({'posted_data': what})
+        return(updated_content)
+
+    def json_updater(content):
+        id=id_generator()
+        new_post = content_updater(id, content)
+        with open('data.json', 'r') as f:
+            data = json.load(f)
+            data.append(new_post)
+        with open('data.json', 'w') as j:
+            json.dump(data, j)
+        return(id)
+    
+    def txt_to_json_transformator():
+        with open('test.txt', 'r') as f:            
+            txt_content = f.read()
+        if txt_content is not None:
+            with open('data.json','w') as f:
+                saved_content = content_updater(0, txt_content)
+                json.dump(saved_content, out_file)

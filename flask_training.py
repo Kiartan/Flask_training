@@ -1,5 +1,8 @@
 from flask import Flask, redirect, request, url_for
 import os.path
+import json
+from data_helper import DataHelper
+
 
 app = Flask(__name__)
 
@@ -22,9 +25,25 @@ def index_get():
 
 
 @app.post('/')
-def savePost():
+def save_post():
     global content
+    #saved_content={}
     content = request.data.decode("utf-8")
-    with open('test.txt', 'w') as f:
-        f.write(content)
+    if os.path.exists('./test.txt'):
+        txt_to_json_transformator()
+        id_new_content = json_updater(content)
+        print(id_new_content)
+    elif os.path.exists('./data.json'):
+        id = json_updater(content)
+        print(id_new_content)
     return redirect(url_for('index_get'))
+
+
+
+
+
+    #json_object = json.dumps(data, indent=2)
+    #content = request.data.decode("utf-8")
+    #with open('test.txt', 'w') as f:
+        #f.write(content)
+    #return redirect(url_for('index_get'))
