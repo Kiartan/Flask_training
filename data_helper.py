@@ -40,7 +40,15 @@ class DataHelper:
             with open('./test.json','w') as j:
                 saved_content = self.posted_content_writer(0, txt_content)
                 json.dump(saved_content, j, indent = 4)
-        return (0)
+        init_id = int(0)
+        return(init_id)
+    
+    def requested_data_finder(self, req_id):
+        searched_id = int(req_id)
+        with open('test.json', 'r') as f:
+           stored_data = json.load(f)
+        requested_data = next(iter(item for item in stored_data if item['id'] == searched_id), None)
+        return(requested_data)
 
 
                 
